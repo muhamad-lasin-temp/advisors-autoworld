@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #f9f9ff;
+    --foreground: #111c2d;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  /* Stitch Precision Mobility Design System Components */
+  .glass-card {
+    background: #ffffff;
+    box-shadow: 0px 4px 20px rgba(30, 41, 59, 0.05);
+    border-radius: 0.75rem; /* 12px */
+    border: 1px solid rgba(196, 197, 213, 0.25);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    box-shadow: 0px 10px 25px rgba(30, 41, 59, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .pill-badge {
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background-color: #00288e;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #1e40af;
+    box-shadow: 0 4px 12px rgba(0, 40, 142, 0.25);
+  }
+
+  .btn-secondary {
+    background-color: #f0f3ff;
+    color: #111c2d;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background-color: #e7eeff;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f9f9ff;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4c5d5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #757684;
+}
