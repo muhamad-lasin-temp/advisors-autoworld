@@ -68,7 +68,7 @@ export default function AdminLoginPage() {
           {/* Logo & Brand Header */}
           <div className="text-center mb-8">
             <div className="flex justify-center">
-              <Logo variant="dark" size="lg" />
+              <Logo variant="dark" size="lg" showSubtitle={false} />
             </div>
           </div>
 

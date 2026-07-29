@@ -17,11 +17,11 @@ export function Logo({
 }: LogoProps) {
   const isLight = variant === 'light';
 
-  // Sizing definitions
+  // Sizing definitions matching text cap height
   const iconSizes = {
-    sm: 'w-11 h-9',
-    md: 'w-14 h-10',
-    lg: 'w-16 h-12',
+    sm: 'w-10 h-6',
+    md: 'w-12 h-7',
+    lg: 'w-14 h-8',
   };
 
   const titleSizes = {
