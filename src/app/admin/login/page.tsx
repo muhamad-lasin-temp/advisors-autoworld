@@ -66,20 +66,9 @@ export default function AdminLoginPage() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
 
           {/* Logo & Brand Header */}
-          <div className="text-center space-y-4 mb-8">
+          <div className="text-center mb-8">
             <div className="flex justify-center">
               <Logo variant="dark" size="lg" />
-            </div>
-            <div>
-              <span className="text-[10px] font-black uppercase tracking-widest text-primary">
-                Authorized Access
-              </span>
-              <h2 className="text-2xl font-extrabold text-on-surface tracking-tight">
-                Dealer Management Portal
-              </h2>
-              <p className="text-xs text-on-surface-variant mt-1">
-                Enter your authorized admin credentials to manage vehicle inventory.
-              </p>
             </div>
           </div>
 
