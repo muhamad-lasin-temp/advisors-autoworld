@@ -75,7 +75,7 @@ export function CarCard({ car, priority = false, onInquire }: CarCardProps) {
 
         {/* Carousel Navigation Arrows */}
         {images.length > 1 && (
-          <div className="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute inset-0 flex items-center justify-between px-1.5 sm:px-2">
             <button
               type="button"
               onClick={handlePrevImage}
@@ -113,26 +113,26 @@ export function CarCard({ car, priority = false, onInquire }: CarCardProps) {
       </div>
 
       {/* Card Content Area */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+      <div className="p-3.5 sm:p-5 flex-1 flex flex-col justify-between space-y-3 sm:space-y-4">
         <div>
           {/* Make & Model Header */}
           <div className="flex items-center justify-between gap-2 text-xs font-bold text-outline uppercase tracking-wider mb-1">
-            <span>{car.make} • {car.body_type || 'Vehicle'}</span>
-            <span className="flex items-center gap-1 text-slate-500 font-semibold lowercase">
-              <Shield className="w-3 h-3 text-primary" /> Trans: {car.transmission}
+            <span className="truncate">{car.make} • {car.body_type || 'Vehicle'}</span>
+            <span className="flex items-center gap-1 text-slate-500 font-semibold lowercase shrink-0">
+              <Shield className="w-3 h-3 text-primary" /> {car.transmission}
             </span>
           </div>
 
           {/* Vehicle Title */}
           <Link href={`/cars/${car.id}`} className="group-hover:text-primary transition-colors block">
-            <h3 className="text-lg font-bold text-on-surface line-clamp-1">
+            <h3 className="text-base sm:text-lg font-bold text-on-surface line-clamp-1">
               {car.title}
             </h3>
           </Link>
 
           {/* Price XL Label */}
           <div className="mt-2 flex items-baseline justify-between">
-            <span className="text-2xl font-extrabold text-primary tracking-tight">
+            <span className="text-xl sm:text-2xl font-extrabold text-primary tracking-tight">
               {formatPrice(car.price)}
             </span>
             <span className="text-xs font-semibold text-outline">
@@ -142,22 +142,22 @@ export function CarCard({ car, priority = false, onInquire }: CarCardProps) {
         </div>
 
         {/* Quick Specs Grid */}
-        <div className="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100 text-xs font-semibold text-on-surface-variant">
-          <div className="flex items-center gap-2 bg-surface-container-low px-3 py-2 rounded-lg">
-            <Gauge className="w-4 h-4 text-primary shrink-0" />
-            <span className="truncate">{formatMileage(car.mileage)}</span>
+        <div className="grid grid-cols-2 gap-1.5 sm:gap-2 pt-2.5 sm:pt-3 border-t border-slate-100 text-xs font-semibold text-on-surface-variant">
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-surface-container-low px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg">
+            <Gauge className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary shrink-0" />
+            <span className="truncate text-[11px] sm:text-xs">{formatMileage(car.mileage)}</span>
           </div>
-          <div className="flex items-center gap-2 bg-surface-container-low px-3 py-2 rounded-lg">
-            <Fuel className="w-4 h-4 text-primary shrink-0" />
-            <span className="truncate">{car.fuel_type}</span>
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-surface-container-low px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg">
+            <Fuel className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary shrink-0" />
+            <span className="truncate text-[11px] sm:text-xs">{car.fuel_type}</span>
           </div>
         </div>
 
         {/* Action Link */}
-        <div className="pt-2 flex items-center justify-between gap-2">
+        <div className="pt-1.5 sm:pt-2 flex items-center justify-between gap-2">
           <Link
             href={`/cars/${car.id}`}
-            className="w-full flex items-center justify-center gap-2 text-xs font-bold text-primary bg-surface-container hover:bg-primary hover:text-white py-3 px-4 rounded-xl transition-all shadow-sm group/btn"
+            className="w-full flex items-center justify-center gap-2 text-xs font-bold text-primary bg-surface-container hover:bg-primary hover:text-white py-2.5 sm:py-3 px-4 rounded-xl transition-all shadow-sm group/btn"
           >
             <span>View Full Details</span>
             <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />

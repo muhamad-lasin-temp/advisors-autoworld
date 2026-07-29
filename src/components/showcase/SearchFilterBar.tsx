@@ -53,35 +53,58 @@ export function SearchFilterBar({
   ].filter(Boolean).length;
 
   return (
-    <div className="bg-white rounded-2xl shadow-level-1 border border-outline-variant/30 p-4 sm:p-6 mb-8 transition-all">
+    <div className="bg-white rounded-2xl shadow-level-1 border border-outline-variant/30 p-3 sm:p-4 md:p-6 mb-6 sm:mb-8 transition-all">
       {/* Top Search & Action Line */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4">
-        
-        {/* Main Search Input */}
-        <div className="relative flex-1">
-          <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-outline" />
-          <input
-            type="text"
-            value={filters.query}
-            onChange={handleQueryChange}
-            placeholder="Search by make, model, or year (e.g., Porsche 911, Tesla, AMG)..."
-            className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200/90 bg-surface-container-lowest focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-sm font-medium text-on-surface transition-all placeholder:text-outline shadow-sm"
-            suppressHydrationWarning
-          />
-          {filters.query && (
-            <button
-              type="button"
-              onClick={() => onFilterChange({ ...filters, query: '' })}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-outline hover:text-on-surface bg-surface-container px-2 py-0.5 rounded-md"
+      <div className="flex flex-col gap-3">
+        {/* Search + Filters button row */}
+        <div className="flex items-stretch gap-2 sm:gap-3">
+          {/* Main Search Input */}
+          <div className="relative flex-1">
+            <Search className="w-4 h-4 sm:w-5 sm:h-5 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-outline" />
+            <input
+              type="text"
+              value={filters.query}
+              onChange={handleQueryChange}
+              placeholder="Search make, model, year..."
+              className="w-full pl-9 sm:pl-12 pr-4 py-3 sm:py-3.5 rounded-xl border border-slate-200/90 bg-surface-container-lowest focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-xs sm:text-sm font-medium text-on-surface transition-all placeholder:text-outline shadow-sm"
               suppressHydrationWarning
-            >
-              Clear
-            </button>
-          )}
+            />
+            {filters.query && (
+              <button
+                type="button"
+                onClick={() => onFilterChange({ ...filters, query: '' })}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-outline hover:text-on-surface bg-surface-container px-2 py-0.5 rounded-md"
+                suppressHydrationWarning
+              >
+                Clear
+              </button>
+            )}
+          </div>
+
+          {/* Toggle Filters Button */}
+          <button
+            type="button"
+            onClick={() => setShowExpandedFilters(!showExpandedFilters)}
+            className={`flex items-center justify-center gap-1.5 px-3 sm:px-5 py-3 sm:py-3.5 rounded-xl font-bold text-xs transition-all border shrink-0 ${
+              showExpandedFilters || activeFilterCount > 0
+                ? 'bg-primary text-white border-primary shadow-sm'
+                : 'bg-surface-container-lowest text-on-surface border-slate-200/90 hover:bg-surface-container-low'
+            }`}
+            suppressHydrationWarning
+          >
+            <SlidersHorizontal className="w-4 h-4" />
+            <span className="hidden xs:inline sm:inline">Filters</span>
+            {activeFilterCount > 0 && (
+              <span className="w-5 h-5 rounded-full bg-white text-primary text-[10px] font-black flex items-center justify-center shadow-xs">
+                {activeFilterCount}
+              </span>
+            )}
+          </button>
         </div>
 
-        {/* Quick Make Dropdown */}
-        <div className="w-full md:w-48">
+        {/* Make + Sort row */}
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
+          {/* Quick Make Dropdown */}
           <select
             value={filters.make}
             onChange={(e) => handleSelectChange('make', e.target.value)}
@@ -95,68 +118,46 @@ export function SearchFilterBar({
               </option>
             ))}
           </select>
-        </div>
 
-        {/* Toggle Filters Button */}
-        <button
-          type="button"
-          onClick={() => setShowExpandedFilters(!showExpandedFilters)}
-          className={`flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-bold text-xs transition-all border ${
-            showExpandedFilters || activeFilterCount > 0
-              ? 'bg-primary text-white border-primary shadow-sm'
-              : 'bg-surface-container-lowest text-on-surface border-slate-200/90 hover:bg-surface-container-low'
-          }`}
-          suppressHydrationWarning
-        >
-          <SlidersHorizontal className="w-4 h-4" />
-          <span>Filters</span>
-          {activeFilterCount > 0 && (
-            <span className="w-5 h-5 rounded-full bg-white text-primary text-[10px] font-black flex items-center justify-center shadow-xs">
-              {activeFilterCount}
-            </span>
-          )}
-        </button>
-
-        {/* Sort Select */}
-        <div className="w-full md:w-52">
+          {/* Sort Select */}
           <select
             value={filters.sortBy}
             onChange={(e) => handleSelectChange('sortBy', e.target.value)}
             className={SELECT_CLASS_PRIMARY}
             suppressHydrationWarning
           >
-            <option value="newest">Sort: Newly Listed</option>
-            <option value="price-asc">Sort: Price (Low to High)</option>
-            <option value="price-desc">Sort: Price (High to Low)</option>
-            <option value="mileage-asc">Sort: Mileage (Lowest)</option>
-            <option value="year-desc">Sort: Year (Newest)</option>
+            <option value="newest">Newly Listed</option>
+            <option value="price-asc">Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
+            <option value="mileage-asc">Mileage: Lowest</option>
+            <option value="year-desc">Year: Newest</option>
           </select>
         </div>
       </div>
 
       {/* Quick Status Segment Buttons */}
-      <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-outline uppercase tracking-wider mr-2">Status:</span>
+      <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 sm:gap-4">
+        <div className="flex items-center flex-wrap gap-1.5 sm:gap-2">
+          <span className="text-[10px] sm:text-xs font-bold text-outline uppercase tracking-wider mr-1">Status:</span>
           {(['all', 'available', 'sold'] as const).map((statusOption) => (
             <button
               key={statusOption}
               type="button"
               onClick={() => handleSelectChange('status', statusOption)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all capitalize cursor-pointer ${
+              className={`px-2.5 sm:px-3.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-all capitalize cursor-pointer ${
                 filters.status === statusOption
                   ? 'bg-primary text-white shadow-sm'
                   : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container'
               }`}
               suppressHydrationWarning
             >
-              {statusOption === 'all' ? 'All Vehicles' : statusOption === 'available' ? 'Available' : 'Sold Archive'}
+              {statusOption === 'all' ? 'All' : statusOption === 'available' ? 'Available' : 'Sold'}
             </button>
           ))}
         </div>
 
-        <div className="text-xs font-bold text-on-surface-variant">
-          Showing <span className="text-primary font-black">{totalResults}</span> vehicle{totalResults === 1 ? '' : 's'}
+        <div className="text-[10px] sm:text-xs font-bold text-on-surface-variant whitespace-nowrap">
+          <span className="text-primary font-black">{totalResults}</span> vehicle{totalResults === 1 ? '' : 's'}
         </div>
       </div>
 

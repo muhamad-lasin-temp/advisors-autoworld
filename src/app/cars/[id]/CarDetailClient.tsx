@@ -26,8 +26,8 @@ export function CarDetailClient({ car, similarCars }: CarDetailClientProps) {
   };
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-5 sm:py-8">
+      <div className="max-w-[1280px] mx-auto px-3 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <div className="flex items-center gap-2 text-xs font-semibold text-outline mb-6 flex-wrap">
           <Link href="/" className="hover:text-primary transition-colors">
@@ -44,9 +44,9 @@ export function CarDetailClient({ car, similarCars }: CarDetailClientProps) {
         </div>
 
         {/* Header Title Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6 sm:mb-8">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center flex-wrap gap-2 mb-1">
               {car.is_sold ? (
                 <span className="bg-slate-900 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full">
                   Sold Archive
@@ -60,26 +60,31 @@ export function CarDetailClient({ car, similarCars }: CarDetailClientProps) {
                 {car.year} Model • {car.body_type || 'Vehicle'}
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-on-surface tracking-tight">
               {car.title}
             </h1>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={handleShare}
-              className="flex items-center gap-2 bg-white text-on-surface border border-outline-variant/40 hover:bg-surface-container-low px-4 py-2.5 rounded-xl font-bold text-xs transition-colors shadow-sm cursor-pointer"
+              className="flex items-center gap-2 bg-white text-on-surface border border-outline-variant/40 hover:bg-surface-container-low px-3 sm:px-4 py-2.5 rounded-xl font-bold text-xs transition-colors shadow-sm cursor-pointer"
             >
               <Share2 className="w-4 h-4 text-primary" />
-              <span>{copied ? 'Link Copied!' : 'Share Vehicle'}</span>
+              <span>{copied ? 'Link Copied!' : 'Share'}</span>
             </button>
           </div>
         </div>
 
         {/* Main 2-Column Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+          {/* Right Column: Sticky Inquire Form - shows first on mobile */}
+          <div className="order-first lg:order-last lg:col-span-1">
+            <InquireForm car={car} />
+          </div>
+
           {/* Left Column: Image Gallery, Specs, Description */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-6 sm:space-y-8">
             <ImageGallery
               images={car.images}
               title={car.title}
@@ -87,10 +92,10 @@ export function CarDetailClient({ car, similarCars }: CarDetailClientProps) {
             />
 
             {/* Overview & Description */}
-            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-level-1 border border-outline-variant/30 space-y-4">
+            <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-level-1 border border-outline-variant/30 space-y-4">
               <div className="flex items-center gap-2 text-xs font-bold text-outline uppercase tracking-wider">
                 <FileText className="w-4 h-4 text-primary" />
-                <span>Vehicle Overview & Condition Note</span>
+                <span>Vehicle Overview &amp; Condition Note</span>
               </div>
               <p className="text-sm text-on-surface-variant leading-relaxed whitespace-pre-line font-medium">
                 {car.description ||
@@ -101,35 +106,30 @@ export function CarDetailClient({ car, similarCars }: CarDetailClientProps) {
             {/* Technical Specifications */}
             <TechSpecsGrid car={car} />
           </div>
-
-          {/* Right Column: Sticky Inquire Form */}
-          <div>
-            <InquireForm car={car} />
-          </div>
         </div>
 
         {/* Similar Vehicles Section */}
         {similarCars.length > 0 && (
-          <div className="mt-20 pt-10 border-t border-slate-200">
-            <div className="flex items-center justify-between mb-8">
+          <div className="mt-14 sm:mt-20 pt-8 sm:pt-10 border-t border-slate-200">
+            <div className="flex items-center justify-between mb-6 sm:mb-8 gap-4">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-outline">
                   Recommendations
                 </span>
-                <h3 className="text-2xl font-bold text-on-surface">
+                <h3 className="text-xl sm:text-2xl font-bold text-on-surface">
                   Similar Vehicles in Inventory
                 </h3>
               </div>
               <Link
                 href="/"
-                className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-primary hover:underline flex items-center gap-1 shrink-0"
               >
-                <span>Browse All Cars</span>
+                <span>Browse All</span>
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {similarCars.map((simCar) => (
                 <CarCard key={simCar.id} car={simCar} />
               ))}

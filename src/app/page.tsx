@@ -72,30 +72,30 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Banner (Renders instantly in static HTML) */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-surface-container-low via-background to-background pt-12 pb-14 border-b border-outline-variant/20">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-4">
+      <section className="relative overflow-hidden bg-gradient-to-b from-surface-container-low via-background to-background pt-8 sm:pt-12 pb-10 sm:pb-14 border-b border-outline-variant/20">
+        <div className="max-w-[1280px] mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="max-w-3xl space-y-3 sm:space-y-4">
             {/* Pill Header */}
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span>Precision Mobility Marketplace</span>
             </div>
 
             {/* Title (LCP Element - Renders instantly) */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-on-surface tracking-tight leading-[1.1]">
-              Verified Pre-Owned Luxury & Performance
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-on-surface tracking-tight leading-[1.1]">
+              Verified Pre-Owned Luxury &amp; Performance
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg text-on-surface-variant leading-relaxed max-w-2xl font-normal">
+            <p className="text-sm sm:text-base md:text-lg text-on-surface-variant leading-relaxed max-w-2xl font-normal">
               Explore structural integrity, full service histories, and transparent specs for handpicked sports cars, luxury sedans, and executive SUVs.
             </p>
 
             {/* Key Value Points */}
-            <div className="pt-4 flex flex-wrap items-center gap-6 text-xs font-bold text-on-surface">
+            <div className="pt-3 sm:pt-4 flex flex-wrap items-center gap-4 sm:gap-6 text-xs font-bold text-on-surface">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-primary" />
-                <span>100% Inspected & Certified</span>
+                <span>100% Inspected &amp; Certified</span>
               </div>
               <div className="flex items-center gap-2">
                 <Award className="w-4 h-4 text-primary" />
@@ -107,7 +107,7 @@ export default function HomePage() {
       </section>
 
       {/* Main Inventory Section */}
-      <section id="inventory" className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <section id="inventory" className="max-w-[1280px] mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10">
         {/* Filter Controls Bar */}
         <SearchFilterBar
           filters={filters}

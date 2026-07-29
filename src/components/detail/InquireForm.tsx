@@ -17,7 +17,7 @@ export function InquireForm({ car }: InquireFormProps) {
   const [hpField, setHpField] = useState(''); // Anti-bot honeypot
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Anti-Bot Honeypot Defense: Silent drop if automated spam bot fills hidden input
@@ -26,19 +26,41 @@ export function InquireForm({ car }: InquireFormProps) {
       return;
     }
 
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setName('');
-      setEmail('');
-      setPhone('');
-      setMessage('');
-      setHpField('');
-    }, 4000);
+    try {
+      const res = await fetch('/api/inquire', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: phone || undefined,
+          message: message || `Hi, I'm interested in the ${car.title}. Please send me more details.`,
+          carId: car.id,
+          carTitle: car.title,
+        }),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setSubmitted(false);
+          setName('');
+          setEmail('');
+          setPhone('');
+          setMessage('');
+          setHpField('');
+        }, 4000);
+      } else {
+        const data = await res.json();
+        alert(data?.error || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      alert('Network error. Please check your connection and try again.');
+    }
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-level-1 border border-outline-variant/30 sticky top-24 space-y-6">
+    <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-level-1 border border-outline-variant/30 lg:sticky lg:top-24 space-y-5 sm:space-y-6">
       
       {/* Price & Status Header */}
       <div>

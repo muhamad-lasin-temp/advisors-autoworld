@@ -52,21 +52,21 @@ export function ContactModal({ car, isOpen, onClose }: ContactModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-slate-100 relative">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
+      <div className="bg-white rounded-t-2xl sm:rounded-2xl max-w-lg w-full max-h-[92dvh] overflow-y-auto shadow-2xl border border-slate-100 relative">
         
         {/* Header */}
-        <div className="bg-primary text-white p-6 relative">
+        <div className="bg-primary text-white p-4 sm:p-6 relative shrink-0">
           <button
             onClick={onClose}
-            className="absolute right-4 top-4 text-white/80 hover:text-white p-1 rounded-lg hover:bg-white/10"
+            className="absolute right-3 sm:right-4 top-3 sm:top-4 text-white/80 hover:text-white p-1 rounded-lg hover:bg-white/10"
           >
             <X className="w-5 h-5" />
           </button>
           <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary-fixed">
             Vehicle Inquiry
           </span>
-          <h3 className="text-xl font-bold mt-1 line-clamp-1">
+          <h3 className="text-lg sm:text-xl font-bold mt-1 line-clamp-1">
             {car.title}
           </h3>
           <p className="text-xs text-primary-fixed-dim mt-1 font-semibold">
@@ -75,7 +75,7 @@ export function ContactModal({ car, isOpen, onClose }: ContactModalProps) {
         </div>
 
         {/* Body */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {submitted ? (
             <div className="py-8 text-center space-y-3">
               <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto animate-bounce">
@@ -102,7 +102,7 @@ export function ContactModal({ car, isOpen, onClose }: ContactModalProps) {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="block text-xs font-bold text-outline uppercase tracking-wider mb-1">
                     Email Address *

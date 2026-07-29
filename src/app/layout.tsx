@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
@@ -16,6 +16,13 @@ export const metadata: Metadata = {
   keywords: ['used cars', 'luxury cars', 'car showcase', 'pre-owned vehicles', 'porsche', 'bmw', 'tesla'],
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,9 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-background text-on-surface antialiased" suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col bg-background text-on-surface antialiased overflow-x-hidden" suppressHydrationWarning>
         <Navbar />
-        <main className="flex-1">
+        <main className="flex-1 min-w-0">
           {children}
         </main>
         <Footer />
